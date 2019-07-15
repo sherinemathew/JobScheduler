@@ -4,7 +4,13 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
-    @available_employees = Employee.where(job: nil)
+    @available_employees = Employee.where(job: nil).order(first_name: :asc)
+  end
+
+  def delete
+    job = Job.find(params[:id])
+    job.destroy
+    redirect_to root_path
   end
 
   def update
