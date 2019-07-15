@@ -15,7 +15,11 @@
             <td><%= job.location %></td>
             <td><%= job.start_date %></td>
             <td><%= job.days_to_complete %></td>
-            <td><%= job.complete %></td>
+            <% if job.complete %>
+                <td>&#9745;</td>
+            <% else %>
+                <td>&#9744;</td>
+            <% end %>
             <td>
                 <% s = "" %>
                 <% job.employees.each do |employee| %>
