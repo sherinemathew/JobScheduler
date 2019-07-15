@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  days_to_complete: 1
+  location: MyString
+  start_date: 2019-07-15
+  complete: false
+
+two:
+  name: MyString
+  days_to_complete: 1
+  location: MyString
+  start_date: 2019-07-15
+  complete: false

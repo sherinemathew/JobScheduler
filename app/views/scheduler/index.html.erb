@@ -1,2 +1,32 @@
-<h1>Scheduler#index</h1>
-<p>Find me in app/views/scheduler/index.html.erb</p>
+<%= link_to "Add a new job", add_job_path %>
+
+<table>
+    <tr>
+        <th>Job</th>
+        <th>Location</th>
+        <th>Start Date</th>
+        <th>Days to Complete</th>
+        <th>Complete?</th>
+        <th>Employees Assigned</th>
+    </tr>
+    <% @jobs.each do |job| %>
+        <tr>
+            <td><%= link_to job.name, show_job_path(job.id) %></td>
+            <td><%= job.location %></td>
+            <td><%= job.start_date %></td>
+            <td><%= job.days_to_complete %></td>
+            <% if job.complete %>
+                <td>&#9745;</td>
+            <% else %>
+                <td>&#9744;</td>
+            <% end %>
+            <td>
+                <% s = "" %>
+                <% job.employees.each do |employee| %>
+                    <% s += employee.first_name + ", " %>
+                <% end %>
+                <%= s %>
+            </td>
+        </tr>
+    <% end %>
+</table>

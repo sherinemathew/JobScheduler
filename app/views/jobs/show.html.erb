@@ -1,0 +1,69 @@
+<%= link_to "Home", root_path %>
+<h1><%= @job.name %></h1>
+<p><%= @job.location %></p>
+
+<%= form_for @job, url: mark_job_completed_path do |form| %>
+    <%= form.hidden_field "job_id", value: @job.id %>
+    <%= form.label :complete %>
+    <%= form.check_box :complete, onclick:"this.form.submit()" %>
+<% end %>
+
+<div id="details">
+    <p>Start Date: <%= @job.start_date %></p>
+    <p>Days to Complete: <%= @job.days_to_complete %></p>
+    <div>
+        <% @job.employees.each do |employee| %>
+            <p><%= employee.name %></p>
+        <% end %>
+    </div>
+    <div id="buttons">
+        <button onclick="edit()">Edit</button>
+        <button onclick="add_employee()">Add Employee</button>
+    </div>
+</div>
+
+<div id="edit-form" style="display: none">
+    <%= form_for @job, url: update_job_path do |form| %>
+        <%= form.hidden_field "job_id", value: @job.id %>
+        <div>
+            <%= form.label :start_date %>
+            <%= form.date_select :start_date, value: @job.start_date %>
+        </div>
+        <div>
+            <%= form.label :days_to_complete %>
+            <%= form.number_field :days_to_complete, step: 1, min: 1, value: @job.days_to_complete %>
+        </div>
+        <%= form.submit "Submit" %>
+        <button onclick="cancel()">Cancel</button>
+    <% end %>
+</div>
+
+<div id="add-employee" style="display: none">
+    <div>
+        <%= form_for @job, url: add_employee_path do |form| %>
+            <%= form.hidden_field "job_id", value: @job.id %>
+            <%= form.label :employees %>
+            <%= form.collection_select :employees, @available_employees, :id, :name %>
+            <%= form.submit "Submit" %>
+            <button onclick="cancel()">Cancel</button>
+        <% end %>
+    </div>
+</div>
+
+<script>
+    function edit() {
+        document.getElementById("details").style.display = "none";
+        document.getElementById("edit-form").style.display = "block";
+    }
+
+    function add_employee() {
+        document.getElementById("buttons").style.display = "none";
+        document.getElementById("add-employee").style.display = "block";
+    }
+
+    function cancel() {
+        document.getElementById("buttons").style.display = "block";
+        document.getElementById("edit-form").style.display = "none";
+        document.getElementById("add-employee").style.display = "none";
+    }
+</script>
