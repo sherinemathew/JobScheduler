@@ -20,6 +20,19 @@ for i in 0..10 do
     job.days_to_complete = rand(1..3)
     job.start_date = Date.today
     job.location = suburbs.shuffle.pop
+    job.complete = rand(0..1) == 1 ? true : false
+
+    if !job.complete
+        for i in 0..3 do
+            emp = Employee.new
+            emp.first_name = first_names.shuffle[0]
+            emp.last_name = last_names.shuffle[0]
+            emp.phone_number = "04#{rand(10..99)} #{rand(100..999)} #{rand(100..999)}"
+            emp.job = job
+            emp.save
+        end
+    end
+
     job.save
 end
 

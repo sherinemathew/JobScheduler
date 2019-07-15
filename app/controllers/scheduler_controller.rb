@@ -2,6 +2,7 @@ class SchedulerController < ApplicationController
   before_action :check_login_status
   
   def index
+    @jobs = Job.all
   end
 
   def check_login_status
