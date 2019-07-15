@@ -1,0 +1,34 @@
+<h1><%= @job.name %></h1>
+<p><%= @job.location %></p>
+
+<div id="details">
+    <p>Start Date: <%= @job.start_date %></p>
+    <p>Days to Complete: <%= @job.days_to_complete %></p>
+    <p onclick="edit()">Edit</p>
+</div>
+
+<div id="edit-form" style="display: none">
+    <%= form_for @job, url: update_job_path do |form| %>
+        <%= form.hidden_field :job_id, value: @job.id %>
+        <div>
+            <%= form.label :start_date %>
+            <%= form.date_select :start_date, value: @job.start_date %>
+        </div>
+        <div>
+            <%= form.label :days_to_complete %>
+            <%= form.number_field :days_to_complete, step: 1, min: 1, value: @job.days_to_complete %>
+        </div>
+        <div>
+            <%= form.label :employees %>
+            <%= form.collection_select :employees, @available_employees, :id, :name %>
+        </div>
+        <%= form.submit "Submit", method: :patch %>
+    <% end %>
+</div>
+
+<script>
+    function edit() {
+        document.getElementById("details").style.display = "none";
+        document.getElementById("edit-form").style.display = "block";
+    }
+</script>

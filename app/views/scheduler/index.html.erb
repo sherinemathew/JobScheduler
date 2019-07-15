@@ -1,3 +1,5 @@
+<%= link_to "Add a new job", add_job_path %>
+
 <table>
     <tr>
         <th>Job</th>
@@ -9,7 +11,7 @@
     </tr>
     <% @jobs.each do |job| %>
         <tr>
-            <td><%= job.name %></td>
+            <td><%= link_to job.name, show_job_path(job.id) %></td>
             <td><%= job.location %></td>
             <td><%= job.start_date %></td>
             <td><%= job.days_to_complete %></td>
