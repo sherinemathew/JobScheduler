@@ -36,7 +36,7 @@
             <%= form.number_field :days_to_complete, step: 1, min: 1, value: @job.days_to_complete %>
         </div>
         <%= form.submit "Submit" %>
-        <button onclick="cancel()">Cancel</button>
+        <%= link_to "Cancel", :back %>
     <% end %>
 </div>
 
@@ -47,7 +47,7 @@
             <%= form.label :employees %>
             <%= form.collection_select :employees, @available_employees, :id, :name %>
             <%= form.submit "Submit" %>
-            <button onclick="cancel()">Cancel</button>
+            <%= link_to "Cancel", :back %>
         <% end %>
     </div>
 </div>
