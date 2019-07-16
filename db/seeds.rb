@@ -6,8 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Job.destroy_all
+EmployeeJob.destroy_all
 Employee.destroy_all
+Job.destroy_all
 
 first_names = ["Adam", "Alex", "Aaron", "Ben", "Carl", "Dan", "David", "Edward", "Fred", "Frank", "George", "Hal", "Hank", "Ike", "John", "Jack", "Joe", "Larry", "Monte", "Matthew", "Mark", "Nathan", "Otto", "Paul", "Peter", "Roger", "Roger", "Steve", "Thomas", "Tim", "Ty", "Victor", "Walter"]
 
@@ -17,24 +18,29 @@ suburbs = ["Albion", "Alderley", "Ascot", "Aspley", "Bald Hills", "Banyo", "Boon
 
 for i in 0..10 do
     job = Job.new
-    job.name = "Job ##{i}"
+    job.location = suburbs.shuffle.pop
+    job.name = "Construction at #{job.location}"
     job.days_to_complete = rand(1..3)
     job.start_date = Date.today
-    job.location = suburbs.shuffle.pop
     job.complete = rand(0..1) == 1 ? true : false
+    job.user = User.first
+    job.save
 
     if !job.complete
-        for i in 0..3 do
+        for i in 0..rand(1..5) do
             emp = Employee.new
             emp.first_name = first_names.shuffle[0]
             emp.last_name = last_names.shuffle[0]
             emp.phone_number = "04#{rand(10..99)} #{rand(100..999)} #{rand(100..999)}"
-            emp.job = job
+
+            # ej = EmployeeJob.new
+            # ej.job = job
+            # ej.employee = emp
+            # ej.save
+
             emp.save
         end
     end
-
-    job.save
 end
 
 for i in 0..20 do
