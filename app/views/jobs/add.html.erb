@@ -1,11 +1,11 @@
 <%= form_for @job, url: create_job_path do |form| %>
     <div>
         <%= form.label :name %>
-        <%= form.text_field :name %>
+        <%= form.text_field :name, required: "required" %>
     </div>
     <div>
         <%= form.label :location %>
-        <%= form.text_field :location %>
+        <%= form.text_field :location, required: "required" %>
     </div>
     <div>
         <%= form.label :start_date %>
@@ -13,7 +13,7 @@
     </div>
     <div>
         <%= form.label :days_to_complete %>
-        <%= form.number_field :days_to_complete, step: 1, min: 1, value: 1 %>
+        <%= form.number_field :days_to_complete, step: 1, min: 1, value: 1, required: "required" %>
     </div>
     <%= form.submit "Submit" %>
 <% end %>

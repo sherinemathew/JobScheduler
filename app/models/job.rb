@@ -1,4 +1,8 @@
 class Job < ApplicationRecord
+    validates :name, presence: true
+    validates :location, presence: true
+    validates :start_date, presence: true
+    validates :days_to_complete, presence: true
     belongs_to :user
     has_many :employee_jobs
     has_many :employees, through: :employee_jobs

@@ -1,7 +1,4 @@
 class JobsController < ApplicationController
-  def index
-  end
-
   def show
     @job = Job.find(params[:id])
     
@@ -47,9 +44,13 @@ class JobsController < ApplicationController
   def mark_job_completed
     job = Job.find(params[:job][:job_id])
     job.complete = params[:job][:complete]
-    job.remove_employees
-    job.save
-    redirect_to root_path
+    job.employees.clear
+    if job.save
+      redirect_to root_path
+    else
+      flash[:alert] = job.errors.full_messages[0]
+      redirect_to root_path
+    end
   end
 
   def add
@@ -64,8 +65,13 @@ class JobsController < ApplicationController
     job.days_to_complete = params[:job][:days_to_complete]
     job.complete = false
     job.start_date = Date.new params[:job]["start_date(1i)"].to_i, params[:job]["start_date(2i)"].to_i, params[:job]["start_date(3i)"].to_i
-    job.save
-    redirect_to root_path
+
+    if job.save
+      redirect_to root_path
+    else
+      flash[:alert] = job.errors.full_messages[0]
+      redirect_to add_job_path
+    end
   end
 
   def edit

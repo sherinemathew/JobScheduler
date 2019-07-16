@@ -1,15 +1,15 @@
 <%= form_for @employee, url: create_employee_path do |form| %>
     <div>
         <%= form.label :first_name %>
-        <%= form.text_field :first_name %>
+        <%= form.text_field :first_name, required: "required" %>
     </div>
     <div>
         <%= form.label :last_name %>
-        <%= form.text_field :last_name %>
+        <%= form.text_field :last_name, required: "required" %>
     </div>
     <div>
         <%= form.label :phone_number %>
-        <%= form.text_field :phone_number %>
+        <%= form.text_field :phone_number, required: "required" %>
     </div>
     <%= form.submit "Submit" %>
 <% end %>
