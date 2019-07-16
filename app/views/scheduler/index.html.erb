@@ -1,32 +1,22 @@
-<%= link_to "Add a new job", add_job_path %>
+<button onclick="view_jobs()">Jobs</button>
+<button onclick="view_employees()">Employees</button>
 
-<table>
-    <tr>
-        <th>Job</th>
-        <th>Location</th>
-        <th>Start Date</th>
-        <th>Days to Complete</th>
-        <th>Complete?</th>
-        <th>Employees Assigned</th>
-    </tr>
-    <% @jobs.each do |job| %>
-        <tr>
-            <td><%= link_to job.name, show_job_path(job.id) %></td>
-            <td><%= job.location %></td>
-            <td><%= job.start_date %></td>
-            <td><%= job.days_to_complete %></td>
-            <% if job.complete %>
-                <td>&#9745;</td>
-            <% else %>
-                <td>&#9744;</td>
-            <% end %>
-            <td>
-                <% s = "" %>
-                <% job.employees.each do |employee| %>
-                    <% s += employee.first_name + ", " %>
-                <% end %>
-                <%= s %>
-            </td>
-        </tr>
-    <% end %>
-</table>
+<div id="joblist">
+    <%= render "joblist" %>
+</div>
+
+<div id="employees" style="display: none">
+    <%= render "employees" %>
+</div>
+
+<script>
+    function view_jobs() {
+        document.getElementById("employees").style.display = "none";
+        document.getElementById("joblist").style.display = "block";
+    }
+
+    function view_employees() {
+        document.getElementById("employees").style.display = "block";
+        document.getElementById("joblist").style.display = "none";
+    }
+</script>

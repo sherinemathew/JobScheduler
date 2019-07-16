@@ -16,10 +16,12 @@
             <p><%= employee.name %></p>
         <% end %>
     </div>
-    <div id="buttons">
-        <button onclick="edit()">Edit</button>
-        <button onclick="add_employee()">Add Employee</button>
-    </div>
+    <% if !@job.complete %>
+        <div id="buttons">
+                <button onclick="edit()">Edit</button>
+                <button onclick="add_employee()">Add Employee</button>
+        </div>
+    <% end %>
 </div>
 
 <div id="edit-form" style="display: none">
@@ -49,6 +51,9 @@
         <% end %>
     </div>
 </div>
+
+
+<%= button_to "Delete", remove_job_path(@job.id), method: :delete %>
 
 <script>
     function edit() {

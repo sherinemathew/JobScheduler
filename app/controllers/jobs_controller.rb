@@ -4,11 +4,13 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    # Need to modify to include employees where their current job's end date is before this job's start date
     @available_employees = Employee.where(job: nil).order(first_name: :asc)
   end
 
   def delete
     job = Job.find(params[:id])
+    job.remove_employees
     job.destroy
     redirect_to root_path
   end
@@ -32,6 +34,7 @@ class JobsController < ApplicationController
   def mark_job_completed
     job = Job.find(params[:job][:job_id])
     job.complete = params[:job][:complete]
+    job.remove_employees
     job.save
     redirect_to root_path
   end

@@ -1,0 +1,23 @@
+<%= button_to "Add a new employee", add_employee_path, method: :get %>
+
+<table>
+    <tr>
+        <th>Employee</th>
+        <th>Contact</th>
+        <th>Current Job</th>
+        <th>Available On</th>
+    </tr>
+    <% @employees.each do |employee| %>
+        <tr>
+            <td><%= employee.name %></td>
+            <td><%= employee.phone_number %></td>
+            <% if employee.job %>
+                <td><%= link_to employee.job.name, show_job_path(employee.job.id) %></td>
+                <td><%= employee.job.start_date + (employee.job.days_to_complete + 1).days %></td>
+            <% else %>
+                <td></td>
+                <td>Available</td>
+            <% end %>
+        </tr>
+    <% end %>
+</table>
