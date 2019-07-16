@@ -3,6 +3,7 @@ class SchedulerController < ApplicationController
   
   def index
     @jobs = Job.where(user: current_user).order(complete: :asc).order(start_date: :asc).order(days_to_complete: :asc)
+    @employees = Employee.all.order(first_name: :asc).order(last_name: :asc)
   end
 
   def check_login_status

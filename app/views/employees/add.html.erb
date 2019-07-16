@@ -1,0 +1,15 @@
+<%= form_for @employee, url: create_employee_path do |form| %>
+    <div>
+        <%= form.label :first_name %>
+        <%= form.text_field :first_name %>
+    </div>
+    <div>
+        <%= form.label :last_name %>
+        <%= form.text_field :last_name %>
+    </div>
+    <div>
+        <%= form.label :phone_number %>
+        <%= form.text_field :phone_number %>
+    </div>
+    <%= form.submit "Submit" %>
+<% end %>

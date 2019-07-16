@@ -1,0 +1,22 @@
+<%= button_to "Add a new employee", add_new_employee_path, method: :get %>
+
+<table>
+    <tr>
+        <th>Employee</th>
+        <th>Contact</th>
+        <th>Current Job</th>
+        <th>Available On</th>
+    </tr>
+    <% @employees.each do |employee| %>
+        <tr>
+            <td><%= employee.name %></td>
+            <td><%= employee.phone_number %></td>
+            <td>
+                <% employee.jobs.each do |job| %>
+                    <p><%= link_to job.name, show_job_path(job.id) %> - <%= job.start_date + (job.days_to_complete + 1).days %></p>
+                <% end %>
+            </td>
+            <td><%= button_to "Remove", delete_employee_path(employee.id), method: :delete %></td>
+        </tr>
+    <% end %>
+</table>
