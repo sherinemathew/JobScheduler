@@ -7,6 +7,14 @@ table {
     border-collapse: collapse;
 }
 
+th {
+    background-color: rgb(200, 200, 200);
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(235, 235, 235);
+}
+
 th, td {
     border: 1px solid black;
     padding: 3px 5px;
