@@ -23,11 +23,9 @@
                 <td>&#9744;</td>
             <% end %>
             <td>
-                <% s = "" %>
                 <% job.employees.each do |employee| %>
-                    <% s += employee.first_name + ", " %>
+                    <p><%= employee.name %></p>
                 <% end %>
-                <%= s %>
             </td>
         </tr>
     <% end %>
